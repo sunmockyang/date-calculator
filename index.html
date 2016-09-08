@@ -1,0 +1,227 @@
+<html lang="en">
+	<head>
+
+		<title>Date Calculator</title>
+
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="">
+
+		<meta name="robots" content="index, follow">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+		<link rel="stylesheet" href="style/style.css" type="text/css"/>
+
+		<meta property="og:site_name" content="">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="">
+		<meta property="og:title" content="">
+		<meta property="og:description" content="">
+		<meta property="og:image" content="">
+
+		<meta name="twitter:site" content="">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:url" content="">
+		<meta name="twitter:title" content="">
+		<meta name="twitter:description" content="">
+		<meta name="twitter:image" content="">
+
+	</head>
+	<body>
+		<div id="main-wrapper" class="wrapper">
+			<section>
+				<h1>Date Calculator</h1>
+			</section>
+			<section>
+				<div class="input-wrapper">
+					<label>
+						<h2>Start date</h2>
+					</label>
+					<input id="d1" type="text" tabindex="1" placeholder="E.g. 2015/12/30, January 12, 2015"/>
+				</div>
+				<div class="input-wrapper">
+					<label>
+						<h2>End date or duration</h2>
+						<p class="note subdued">Calculate date, by adding or subtracting time. <a tabindex="0" href="#" onclick="toggleModal()">View examples</a></p>
+					</label>
+					<input id="d2" type="text" tabindex="2" placeholder="Eg: 2016/12/30, +100 days, -50 years"/>
+				</div>
+			</section>
+			<section>
+				<div class="result-header">
+					<h1 id="result1">Result</h1>
+					<p id="inputParsed" class="note subdued">Between January 5, 2016 – January 4, 2022</p>
+				</div>
+				<div class="result-formats">
+					<h2>Other time formats</h2>
+					<ul id="otherResults" class="subdued">
+						<li>6 years + 1 day</li>
+						<li>72 months + 1 day</li>
+						<li>2191 days</li>
+						<li>52,584 hours</li>
+						<li>3,155,40 minutes</li>
+						<li>189,302,400 seconds</li>
+					</ul>
+				</div>
+			</section>
+			<section>
+        <p>Made with Love by <a target="_blank" href="https://twitter.com/sunmock">Sunmock</a> and <a target="_blank" href="http://imrusty.com">Rusty.</a></p>
+      </section>
+		</div>
+		<div class="modal">
+			<div class="wrapper">
+			<button class="modal-close" onclick="toggleModal()">×</button>
+			<div class="modal-content">
+				<div class="modal-header">
+						<h1>Other Examples</h1>
+					</div>
+					<div class="modal-body">
+						<ul>
+							<li>+ 400 years</li>
+							<li>+ 6 months</li>
+							<li>- 5 weeks</li>
+							<li>2015/12/30</li>
+							<li>October 12, 1991</li>
+							<li>Sept 5, 2006</li>
+							<li>Today</li>
+							<li>Last Thursday</li>
+							<li>Next Wednesday</li>
+						</ul>
+					</div>
+				</div>
+				<div class="modal-bg"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/date-calculator.js"></script>
+	<script type="text/javascript" src="js/libs/date.js"></script>
+	<script>
+	var elem = {};
+	var app = {
+		inputDelay: 500,
+		inputTimeoutID: -1,
+		inputText1: "",
+		inputText2: "",
+		date1: null,
+		date2: null,
+		interval: null,
+		result: null
+	}
+
+	window.onload = main;
+
+	function main() {
+		elem = {
+			input1: document.getElementById("d1"),
+			input2: document.getElementById("d2"),
+			inputParsed: document.getElementById("inputParsed"),
+			result: document.getElementById("result1"),
+			otherResults: document.getElementById("otherResults")
+		}
+
+		elem.input1.addEventListener("keyup", function(event) {
+			if (event.keyCode == 13) {
+				event.preventDefault();
+				elem.input2.focus();
+			}
+
+			onInput1(true);
+		});
+
+		elem.input2.addEventListener("keyup", function(event) {
+			onInput2(true);
+		});
+
+		parseDates();
+	}
+
+	function toggleModal(){
+		document.body.classList.toggle('modal-visible');
+	}
+
+	function onInput1(wait) {
+		if (app.inputText1 === elem.input1.value) {
+			return;
+		}
+
+		if (wait) {
+			clearTimeout(app.inputTimeoutID);
+			app.inputTimeoutID = setTimeout(onInput1.bind(window, false), app.inputDelay);
+			app.date1 = null;
+			clearOutput();
+		}
+		else {
+			parseDates();
+		}
+	}
+
+	function onInput2(wait) {
+		if (app.inputText2 === elem.input2.value) {
+			return;
+		}
+
+		if (wait) {
+			clearTimeout(app.inputTimeoutID);
+			app.inputTimeoutID = setTimeout(onInput2.bind(window, false), app.inputDelay);
+			app.date2 = null;
+			clearOutput();
+		}
+		else {
+			parseDates();
+		}
+	}
+
+	function parseDates() {
+		clearOutput();
+
+		app.inputText1 = elem.input1.value;
+		app.inputText2 = elem.input2.value;
+		app.date1 = Date.parse(app.inputText1);
+		app.date2 = Date.parse(app.inputText2);
+		if (app.date1 === null || app.date2 === null) {
+			return;
+		}
+
+		// Between January 5, 2016 – January 4, 2022
+		elem.inputParsed.innerHTML = "Between ";
+		elem.inputParsed.innerHTML += monthNames[app.date1.getMonth()] + " " + app.date1.getDate() + ", " + app.date1.getFullYear() + " – ";
+		elem.inputParsed.innerHTML += monthNames[app.date2.getMonth()] + " " + app.date2.getDate() + ", " + app.date2.getFullYear();
+
+		var dayResult = DateCalcApp.getTimeStringBetweenDates(app.date1, app.date2, "day");
+		elem.result.innerHTML = dayResult;
+
+		var lastResultStr = "";
+		for (var i = 0; i < DateCalcApp.units.length; i++) {
+			var resultStr = DateCalcApp.getTimeStringBetweenDates(app.date1, app.date2, DateCalcApp.units[i]);
+			if (resultStr != lastResultStr) {
+				lastResultStr = resultStr;
+				createOtherOutput(resultStr);
+			}
+		}
+	}
+
+	function clearOutput() {
+		elem.result.innerHTML = "Waiting to calculate";
+		elem.inputParsed.innerHTML = "Waiting to calculate";
+		elem.otherResults.innerHTML = "";
+	}
+
+	function createOtherOutput(str) {
+		if (str !== "") {
+			var li = document.createElement("li");
+			li.innerHTML = str;
+			elem.otherResults.appendChild(li);
+		}
+	}
+
+	var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+	</script>
+
+</html>
