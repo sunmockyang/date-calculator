@@ -1,51 +1,51 @@
 <!DOCTYPE HTML>
 <title>Date Calculator</title>
 <meta charset=utf-8 />
-<meta name=viewport content="width=device-width, initial-scale=1">
-<meta name=description content="Date calculator">
-<meta name=keywords content="calculate, dates">
-<meta name=author content="Russell Baylis, Sunmock Yang">
-<meta name=robots content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Date calculator">
+<meta name="keywords" content="calculate, dates">
+<meta name="author" content="Russell Baylis, Sunmock Yang">
+<meta name="robots" content="index, follow">
 <style>
 	$$STYLES$$
 </style>
-<div id=main-wrap class=wrap>
+<div id="main-wrap" class="wrap">
 	<section>
 		<h1>Date Calculator</h1>
 	</section>
 	<section>
-		<div class=input-wrap>
-			<label for=d1>
+		<div class="input-wrap">
+			<label for="d1">
 				<h2>Start date</h2>
 			</label>
-			<input id=d1 type=text tabindex=1 placeholder="E.g. 2015/12/30, January 12, 2015"/>
+			<input id="d1" type="text" tabindex="1" placeholder="E.g. 2015/12/30, January 12, 2015"/>
 		</div>
-		<div class=input-wrap>
-			<label for=d2f>
+		<div class="input-wrap">
+			<label for="d2f">
 				<h2>End date or duration</h2>
-				<p>Calculate date, by adding or subtracting time. <a tabindex=0 href=# onclick=mdl()>View examples</a></p>
+				<p>Calculate date, by adding or subtracting time. <a tabindex="0" href="#" onclick="mdl()">View examples</a></p>
 			</label>
-			<input id=d2 type=text tabindex=2 placeholder="Eg: 2016/12/30, +100 days, -50 years"/>
+			<input id="d2" type="text" tabindex="2" placeholder="Eg: 2016/12/30, +100 days, -50 years"/>
 		</div>
 	</section>
 	<section>
-		<div class=result-header>
-			<h1 id=result1>Result</h1>
-			<p id=inputParsed></p>
+		<div class="result-header">
+			<h1 id="result1">Result</h1>
+			<p id="inputParsed"></p>
 		</div>
 	</section>
 	<section>
-<p>Made with Love by <a target=_blank href=http://sunmock.com>Sunmock</a> and <a target=_blank href="http://imrusty.com">Rusty.</a></p>
+<p>Made with Love by <a target="_blank" href="http://sunmock.com">Sunmock</a> and <a target="_blank" href="http://imrusty.com">Rusty.</a></p>
 </section>
 </div>
-<div class=mdl>
-	<div class=wrap>
-	<button class=close onclick=mdl()>×</button>
-	<div class=content>
-		<div class=header>
+<div class="mdl">
+	<div class="wrap">
+	<button class="close" onclick="mdl()">×</button>
+	<div class="content">
+		<div class="header">
 				<h1>Other Examples</h1>
 			</div>
-			<div class=body>
+			<div class="body">
 				<ul>
 					<li>+ 400 years</li>
 					<li>+ 6 months</li>
@@ -57,7 +57,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class=bg></div>
+		<div class="bg"></div>
 	</div>
 </div>
 <script>
