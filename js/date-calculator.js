@@ -1,3 +1,7 @@
+// Date Calculator
+// DC(date1, date2) - returns interval string
+// DC(date, years, months, days) - returns date
+
 var DC = (function(){
 	function DC(arg1, arg2){
 		// Route to:
@@ -5,14 +9,14 @@ var DC = (function(){
 			return getDaysBetween(arg1, arg2);
 		}
 		else { // Date +- Interval calculation
-			return addTime.apply(0, arguments);
+			return addTime(arg1, arg2);
 		}
 	};
 
-	function addTime(date, years, months, days) {
-		return new Date(date.getFullYear() + (years || 0),
-			date.getMonth() + (months || 0),
-			date.getDate() + (days || 0));
+	function addTime(date, interval) {
+		return new Date(date.getFullYear() + (interval[0] || 0),
+			date.getMonth() + (interval[1] || 0),
+			date.getDate() + (interval[2] || 0));
 	};
 
 	function getDaysBetween(start, end) {
@@ -69,5 +73,6 @@ var DC = (function(){
 	return DC;
 }());
 
-console.log(DC(new Date(2017, 1, 1), new Date(2016, 1, 2)));
-console.log(DC(new Date(2017, 1, 1), 0, 20, 5));
+// console.log(DC(new Date(2017, 1, 1), new Date(2016, 1, 2)));
+// console.log(DC(new Date(2017, 1, 1), [0, 20, 5]));
+// console.log(DC(new Date(2017, 1, 1), [0, 0, 5]));
