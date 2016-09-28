@@ -1,6 +1,8 @@
+*{ margin: 0; box-sizing: border-box;
+}
+
 body, html{
   padding: 0;
-  margin: 0;
 }
 
 body{
@@ -15,22 +17,19 @@ body{
 }
 
 section{
-  padding-bottom: 50px;
-  padding-top: 50px;
+  padding: 50px 0;
   border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 
-* { margin: 0; box-sizing: border-box; }
-
-ul {
-  padding-left: 1em;
+ul{
+  padding: 1em 0 0 1em;
 }
 
 li{
   margin-bottom: 10px;
 }
 
-.wrapper{
+.wrap{
   max-width: 600px;
   margin: 0 auto;
 }
@@ -46,7 +45,7 @@ h2{
   font-size: 20px;
 }
 
-.input-wrapper:nth-child(1),
+.input-wrap:nth-child(1),
 .result-header{
   padding-bottom: 60px;
 }
@@ -67,7 +66,7 @@ input:focus{
   outline: none;
 }
 
-label {
+label{
   display: block;
   padding-bottom: 15px;
 }
@@ -77,17 +76,16 @@ a{
   background: linear-gradient(90deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.8) 100%);
   background-position: left 1.25em;
   background-repeat: no-repeat;
-  border-bottom: none;
   display: inline-block;
   color: white;
   background-size: 100% 1px;
 }
 
-.subdued{
-  opacity: 0.7;
+h2 + p{
+  opacity: .7;
 }
 
-.modal{
+.mdl{
   position: fixed;
   z-index: 999;
   top: 0;
@@ -98,17 +96,17 @@ a{
   opacity: 0;
 }
 
-.modal-bg{
+.mdl .bg{
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.55);
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
   z-index: 1;
 }
 
-.modal .modal-content{
+.mdl .content{
   position: relative;
   z-index: 2;
   padding-top: 50px;
@@ -116,24 +114,24 @@ a{
 }
 
 
-.modal-visible .modal{
+.mdl-visible .mdl{
   opacity: 1;
   pointer-events: all;
 }
 
-.modal .wrapper{
+.mdl .wrap{
   padding: 0 25px;
 }
 
-.modal-visible .modal-bg{
+.mdl-visible .bg{
   pointer-events: all;
 }
 
-.modal-visible #main-wrapper{
+.mdl-visible #main-wrap{
   -webkit-filter: blur(10px);
 }
 
-.modal-close {
+.mdl .close{
   position: fixed;
   top: 0;
   right: 0;
