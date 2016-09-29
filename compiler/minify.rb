@@ -1,7 +1,6 @@
-require 'rubygems'
-require 'closure-compiler'
 require 'cssminify'
 require 'html_press'
+require 'uglifier'
 
 output = "../../index.html"
 
@@ -24,16 +23,13 @@ js_content = ""
 js_paths.each { |path|
 	js_content = js_content + File.read(path)
 }
-
-js_content = Closure::Compiler.new.compile(js_content)
+js_content = Uglifier.new.compile(js_content)
 
 # HTML
 html_content = File.read(html_path, :encoding => "UTF-8")
+html_content = HtmlPress.press(html_content)
 html_content["$$STYLES$$"] = css_content
 html_content["$$SCRIPT$$"] = js_content
-
-html_content = HtmlPress.press(html_content)
-puts html_content
 
 File.open("index.html",'w') do |s|
   s.print html_content
