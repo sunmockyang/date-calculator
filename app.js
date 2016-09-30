@@ -40,13 +40,18 @@ app.get('/', function(req, res){
 		}
 
 		if (!result) {
-			indexBody = injectValue(indexBody, "$$RESULT1$$", "Invalid input, try again.");
-			if (inputText1 !== "" || inputText2 !== "") {
+			if (inputText1 == "" && inputText2 == "") {
+				indexBody = injectValue(indexBody, "$$RESULT1$$", "");
+				indexBody = injectValue(indexBody, "$$RESULTSUB$$", "");
+			}
+			else if (inputText1 !== "" || inputText2 !== "") {
 				var output1 = formatTime(date1, inputText1);
 				var output2 = formatTime(date2, inputText2);
+				indexBody = injectValue(indexBody, "$$RESULT1$$", "Invalid input, try again.");
 				indexBody = injectValue(indexBody, "$$RESULTSUB$$", output1 + ((output1) ? " – " : "") + output2);
 			}
 			else {
+				indexBody = injectValue(indexBody, "$$RESULT1$$", "Invalid input, try again.");
 				indexBody = injectValue(indexBody, "$$RESULTSUB$$", "");
 			}
 			indexBody = injectValue(indexBody, "$$OTHERTIMEFORMATSVISIBILITY$$", "hidden");
