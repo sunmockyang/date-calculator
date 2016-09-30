@@ -9,7 +9,7 @@
 <style>
 	$$STYLES$$
 </style>
-<link rel="stylesheet" type="text/css" href="style.css">
+<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 <div id="main-wrap" class="wrap">
 	<section>
 		<h1>Date Calculator</h1>
@@ -19,14 +19,14 @@
 			<label for="d1">
 				<h2>Start date</h2>
 			</label>
-			<input id="d1" type="text" tabindex="1" placeholder="E.g. 2015/12/30, January 12, 2015, Today"/>
+			<input id="d1" type="text" placeholder="E.g. 2015/12/30, January 12, 2015, Today"/>
 		</div>
 		<div class="input-wrap">
 			<label for="d2f">
 				<h2>End date or duration</h2>
-				<p>Calculate date, by adding or subtracting time. <a tabindex="0" href="#" id="mdlO">View examples</a></p>
+				<p>Calculate date, by adding or subtracting time. <a class="mdl-launch" href="#" id="mdlO">View examples</a></p>
 			</label>
-			<input id="d2" type="text" tabindex="2" placeholder="Eg: 2016/12/30, +100 days, -50 years"/>
+			<input id="d2" type="text" placeholder="Eg: 2016/12/30, +100 days, -50 years"/>
 		</div>
 	</section>
 	<section>
@@ -51,8 +51,8 @@
 </section>
 </div>
 <div class="mdl">
+	<button class="close" id="mdlX"">×</button>
 	<div class="wrap">
-	<button class="close" id="mdlX">×</button>
 	<div class="content">
 		<div class="header">
 				<h1>Other Examples</h1>

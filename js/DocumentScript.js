@@ -62,7 +62,7 @@ var app = (function(){
 			resultElem.innerHTML = timeBetweenString + ((result[0] > 0 || result[1] > 0) ? (" (" + appendUnitString("day", result[3], "") + ")") : "");;
 			inputParsedElem.innerHTML = "Between " + formatDate(date1) + " – " + formatDate(date2);
 		}
-	}
+	};
 
 	function appendUnitString(unit, value, str, force) {
 		return (value > 0 || force) ? (((str === "") ? "" : " ") + value + " " + ((value !== 1) ? unit + "s" : unit)) : "";
@@ -78,9 +78,16 @@ var app = (function(){
 		str += ((str != "") ? ", " : "") + getUnitString(abs(interval[1]), Un[1]);
 		str += (str.endsWith(", ") ? "" : ((str != "") ? ", " : "")) + getUnitString(abs(interval[2]), Un[2]);
 		return str;
-	}
+	};
 
+	
 	function mdl(){
+		if (!document.body.classList.contains('mdl-visible')) {
+			document.getElementsByClassName("close")[0].focus();
+		}
+		else {
+			document.getElementsByClassName("mdl-launch")[0].focus();
+		}
 		document.body.classList.toggle('mdl-visible');
 	};
 
@@ -94,7 +101,7 @@ var app = (function(){
 			}
 		}
 		return str;
-	}
+	};
 
 	// http://stackoverflow.com/questions/12487422/take-a-value-1-31-and-convert-it-to-ordinal-date-w-javascript/12487454#12487454
 	function getOrdinal(n) {
@@ -104,7 +111,7 @@ var app = (function(){
 			return n+(s[(v-20)%10]||s[v]||s[0]);
 		}
 		return n;     
-	}
+	};
 	
 	return main;
 }());
