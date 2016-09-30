@@ -20,26 +20,27 @@
 				<label for="d1">
 					<h2>Start date</h2>
 				</label>
-				<input id="d1" name="d1" type="text" placeholder="E.g. Today, 2015/12/30, January 12, 2015"/>
+				<input id="d1" name="d1" type="text" placeholder="E.g. Today, 2015/12/30, January 12, 2015" value="$$INPUT1$$"/>
 			</div>
 			<div class="input-wrap">
 				<label for="d2f">
 					<h2>End date or duration</h2>
-					<p>Calculate date, by adding or subtracting time. <a class="mdl-launch" href="#" id="mdlO">View examples</a></p>
+					<p>Calculate date, by adding or subtracting time. <a class="mdl-launch hidden" href="#" id="mdlO">View examples</a></p>
 				</label>
-				<input id="d2" name="d2" type="text" placeholder="Eg: 12/30/2016, +100 days, -50 years"/>
+				<input id="d2" name="d2" type="text" placeholder="Eg: 12/30/2016, +100 days, -50 years" value="$$INPUT2$$"/>
 			</div>
 			<noscript><input class="submit" type="submit" value="Submit"/></noscript>
 		</form>
 	</section>
 	<section>
 		<div class="result-header">
-			<h1 id="result1">Sorry, Date Calculator requires JavaScript to be enabled to work.</h1>
-			<p id="sub"></p>
+			<h1 id="result1">$$RESULT1$$</h1>
+			<p id="sub">$$RESULTSUB$$</p>
 		</div>
-		<div class="result-formats hidden" id="otherSection">
+		<div class="result-formats $$OTHERTIMEFORMATSVISIBILITY$$" id="otherSection">
 			<h2>Other time formats</h2>
 			<ul id="otherList" class="subdued">
+				$$RESULTTIMEFORMATS$$
 			</ul>
 		</div>
 	</section>
@@ -74,6 +75,7 @@
 	</div>
 </div>
 <script>
+	var global = null;
 	$$SCRIPT$$
 </script>
 <script type="text/javascript" src="js/DateUtils.js"></script>
