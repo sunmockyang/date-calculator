@@ -1,5 +1,7 @@
 var express = require('express');
+var compression = require('compression')
 var fs = require('fs');
+
 
 var projectRoot = "./";
 
@@ -8,10 +10,13 @@ require(projectRoot + "js/DateParser.js");
 require(projectRoot + "js/DateUtils.js");
 
 var app = express();
+app.use(compression())
 
 var indexFile = projectRoot + "index.html"
 
 app.get('/', function(req, res){
+	// res.writeHead(200, {'Content-Type': 'text/html', 'Content-Encoding': 'gzip'});
+
 	var inputText1 = req.query.d1;
 	var inputText2 = req.query.d2;
 
@@ -75,7 +80,9 @@ app.get('/', function(req, res){
 
 			indexBody = injectValue(indexBody, "$$RESULTTIMEFORMATS$$", listText);
 		}
-
+		// zlib.gzip(indexBody, function (_, result) {
+		// 	res.send(result);
+		// });
 		res.send(indexBody);
 	});
 });
