@@ -15,19 +15,22 @@
 		<h1>Date Calculator</h1>
 	</section>
 	<section>
-		<div class="input-wrap">
-			<label for="d1">
-				<h2>Start date</h2>
-			</label>
-			<input id="d1" type="text" placeholder="E.g. Today, 2015/12/30, January 12, 2015"/>
-		</div>
-		<div class="input-wrap">
-			<label for="d2f">
-				<h2>End date or duration</h2>
-				<p>Calculate date, by adding or subtracting time. <a class="mdl-launch" href="#" id="mdlO">View examples</a></p>
-			</label>
-			<input id="d2" type="text" placeholder="Eg: 12/30/2016, +100 days, -50 years"/>
-		</div>
+		<form action="./index.html" method="get">
+			<div class="input-wrap">
+				<label for="d1">
+					<h2>Start date</h2>
+				</label>
+				<input id="d1" name="d1" type="text" placeholder="E.g. Today, 2015/12/30, January 12, 2015"/>
+			</div>
+			<div class="input-wrap">
+				<label for="d2f">
+					<h2>End date or duration</h2>
+					<p>Calculate date, by adding or subtracting time. <a class="mdl-launch" href="#" onclick="mdl()">View examples</a></p>
+				</label>
+				<input id="d2" name="d2" type="text" placeholder="Eg: 12/30/2016, +100 days, -50 years"/>
+			</div>
+			<noscript><input class="submit" type="submit" value="Submit"/></noscript>
+		</form>
 	</section>
 	<section>
 		<div class="result-header">
