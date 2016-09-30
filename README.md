@@ -12,6 +12,10 @@ __The page currently sits at 3.4KB after minification + gzipping__
 - Minimal class/variable names
 - Gzipping
 
+##Installation
+- Run `npm install` to install dependencies
+- Run `node app.js` to run the server
+
 ##Compilation:
 Run `make`, which will run our ruby script to generate index.html (minified), and index.html.gz (minified + gzipped)
 
