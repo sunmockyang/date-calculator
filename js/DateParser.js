@@ -5,7 +5,7 @@ var DP = (function(){
 	var numberRegex = new RegExp(/[0-9]*?[0-9]+/g);
 
 	function DP(dateString){
-		dateStringLower = dateString.toLowerCase();
+		var dateStringLower = dateString.toLowerCase();
 		var date = 0;
 		var firstChar = dateStringLower.match(/^\s*(\S)/m);
 		var allNumbers = dateStringLower.match(numberRegex);
@@ -144,6 +144,10 @@ var DP = (function(){
 	
 	return DP;
 }());
+
+if (global) {
+	global.DP = DP;
+}
 
 // console.log(DP("January 1st, 1991"));
 // console.log(DP("Jan.1st, 1991"));

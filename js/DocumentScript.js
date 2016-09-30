@@ -28,6 +28,8 @@ var app = (function(){
 
 		modalOn.onclick = modalOff.onclick = mdl;
 
+		modalOn.classList.remove("hidden");
+
 		onInput();
 	};
 
@@ -48,7 +50,7 @@ var app = (function(){
 			resultElem.innerHTML = "Waiting for input...";
 			if (inputText1 !== "" || inputText2 !== "") {
 				var output1 = formatTime(date1, inputText1);
-				var output2 = formatTime(date2, inputText2)
+				var output2 = formatTime(date2, inputText2);
 				inputParsedElem.innerHTML = output1 + ((output1) ? " – " : "") + output2;
 			}
 		}

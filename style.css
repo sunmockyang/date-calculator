@@ -153,3 +153,8 @@ h2 + p{
 	border: none;
 	padding: 0;
 }
+
+.submit{
+	background-color: white;
+	margin-top: 60px;
+}

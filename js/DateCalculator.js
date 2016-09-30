@@ -72,6 +72,10 @@ var DC = (function(){
 	return DC;
 }());
 
+if (global) {
+	global.DC = DC;
+}
+
 // console.log(DC(new Date(2017, 1, 1), new Date(2016, 1, 2)));
 // console.log(DC(new Date(2017, 1, 1), [0, 20, 5]));
 // console.log(DC(new Date(2017, 1, 1), [0, 0, 5]));
