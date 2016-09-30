@@ -4,7 +4,7 @@ A minuscule tool for doing date calculations with basic natural language support
 
 Check out the live demo [here](http://calculatedates.com)
 
-__The page currently sits at 3.4KB after minification + gzipping__
+__The page currently sits at 3.7KB after minification + gzipping__
 
 ##What we did to squeeze our website into as few kibbles as possible:
 - HTML/CSS/JavaScript minification
