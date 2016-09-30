@@ -4,12 +4,17 @@
 
 var DC = (function(){
 	function DC(arg1, arg2){
-		// Route to:
-		if (arg2 instanceof Date) { // Date - Date calculation
-			return getDaysBetween(arg1, arg2);
+		if (arg1 && arg2) {
+			// Route to:
+			if (arg2 instanceof Date) { // Date - Date calculation
+				return getDaysBetween(arg1, arg2);
+			}
+			else { // Date +- Interval calculation
+				return addTime(arg1, arg2);
+			}
 		}
-		else { // Date +- Interval calculation
-			return addTime(arg1, arg2);
+		else {
+			return 0;
 		}
 	};
 
@@ -20,6 +25,8 @@ var DC = (function(){
 	};
 
 	function getDaysBetween(start, end) {
+		start = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+		end = new Date(end.getFullYear(), end.getMonth(), end.getDate());
 		var startTime = start.getTime();
 		var endTime = end.getTime();
 
@@ -40,7 +47,7 @@ var DC = (function(){
 		var endDay = end.getDate();
 
 		if (startDay > endDay) {
-			endDay += getDaysInMonth(startMonth++, startYear);
+			endDay += getDaysInMonth(++startMonth, startYear);
 		}
 
 		if (startMonth > endMonth) {
@@ -52,17 +59,9 @@ var DC = (function(){
 		var monthsBetween = endMonth - startMonth;
 		var daysBetween = endDay - startDay;
 
-		var timeBetweenString = "";
-		
-		timeBetweenString = appendUnitString("year", yearsBetween, timeBetweenString);
-		timeBetweenString += appendUnitString("month", monthsBetween, timeBetweenString);
-		timeBetweenString += appendUnitString("day", daysBetween, timeBetweenString);
+		var intervalArray = [yearsBetween, monthsBetween, daysBetween, days];
 
-		return timeBetweenString + " (" + appendUnitString("day", days, "") + ")";
-	};
-
-	function appendUnitString(unit, value, str) {
-		return (value > 0) ? (((str === "") ? "" : " ") + value + " " + ((value !== 1) ? unit + "s" : unit)) : "";
+		return intervalArray;
 	};
 
 	// Jan = 0, Feb = 1, etc

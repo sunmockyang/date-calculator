@@ -7,20 +7,29 @@ var DP = (function(){
 	function DP(dateString){
 		dateStringLower = dateString.toLowerCase();
 		var date = 0;
+		var firstChar = dateStringLower.match(/^\s*(\S)/m);
+		var allNumbers = dateStringLower.match(numberRegex);
 
-		if (dateStringLower.match(/^\s*(\S)/m)[0].match(/[\+|\-]/)) {
+		if (dateStringLower.includes("today")) {
+			date = new Date();
+		}
+		else if (dateStringLower.includes("tomorrow") || dateStringLower.includes("tommorrow")) {
+			date = new Date();
+			date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+		}
+		else if (firstChar && firstChar.length > 0 && (firstChar[0].match(/[\+|\-]/) || firstChar[0].match(numberRegex)) && dateStringLower.match(/[a-z]/)) {
 			date = parseInterval(dateStringLower);
 		}
-		else if (dateStringLower.match(/[j,f,m,a,s,o,n,d]/i)) {
+		else if (parseMonth(dateStringLower) !== null) {
 			date = parseText(dateStringLower);
 		}
-		else if (dateStringLower.match(numberRegex).length <= 3){
+		else if (allNumbers && allNumbers.length <= 3){
 			date = parseMMDDYYYY(dateStringLower);
 		}
-		else {
-			console.log("Yolo-ing...");
-			date = new Date(dateString); // YOLO
-		}
+		// else {
+		// 	console.log("Yolo-ing...");
+		// 	date = new Date(dateString); // YOLO
+		// }
 
 		return date;
 	};
@@ -30,29 +39,58 @@ var DP = (function(){
 
 		// Get first set of numbers for date
 		// Default to first day of month
-		day = numbers[0] || 1,
+		day = (numbers && numbers[0]) || 1,
 
 		// Get second set of numbers for year
 		// Default to this year
-		year = numbers[1] || (new Date).getFullYear(),
+		year = (numbers && numbers[1]) || (new Date).getFullYear(),
 
 		month = 0;
 
 		// Parse Month
-		SMN.some(function(cv, i) {
-			return dateString.includes(cv) && (month = i);
-		});
+		month = parseMonth(dateString);
+
+		if (day > (new Date(year, month + 1, 0).getDate())) {
+			return null;
+		}
 
 		return new Date(year, month, day);
 	};
 
 	function parseMMDDYYYY(dateString) {
-		var numbers = dateString.match(numberRegex),
-		time = [(new Date).getFullYear(), 0, 1]; //year, month, date
+		var numbers = dateString.match(numberRegex)
 
-		time = numbers;
+		// Default format = MM/DD/YYYY
+		var month = numbers[0];
+		var day = numbers[1];
+		var year = numbers[2];
 
-		return new Date(time[2], time[0] - 1, time[1]);
+		// Try YYYY/MM/DD
+		if (!isValidDay(day, month, year)) {
+			year = numbers[0];
+			month = numbers[1];
+			day = numbers[2];
+		}
+
+		// Try DD/MM/YYYY
+		if (!isValidDay(day, month, year)) {
+			day = numbers[0];
+			month = numbers[1];
+			year = numbers[2];
+		}
+
+		// Try YYYY/DD/MM
+		if (!isValidDay(day, month, year)) {
+			year = numbers[0];
+			day = numbers[1];
+			month = numbers[2];
+		}
+
+		if (!isValidDay(day, month, year)) {
+			return null;
+		}
+
+		return new Date(year, month - 1, day);
 	};
 
 	function parseInterval(dateString) {
@@ -63,23 +101,46 @@ var DP = (function(){
 		inputValues.forEach(function (cv) {
 			var words = cv.split(" "),
 			value = cv.match(numberRegex)[0],
-			unit = 2; // default day
+			unit = 2, // default day
+			daysInWeekMultiplier = 1; // Kind of a hack
 
 			words.forEach(function (word, i, arr) {
 				if (!numberRegex.test(word)) {
 					SU.forEach(function (unitType, i, arr) {
 						if (word.startsWith(unitType)) {
-							unit = i;
+							if (word.startsWith("w")) {
+								unit = 2;
+								daysInWeekMultiplier = 7;
+							}
+							else {
+								unit = i;
+							}
 						}
 					});
 				}
 			});
 
-			timeValues[unit] = (operation) * cv.match(numberRegex)[0];
+			timeValues[unit] += (operation) * cv.match(numberRegex)[0] * daysInWeekMultiplier;
 		});
 
 		return [timeValues[0], timeValues[1], timeValues[2]];
 	};
+
+	function parseMonth(dateString) {
+		var month = null;
+		SMN.some(function(cv, i) {
+			return dateString.includes(cv) && (month = i);
+		});
+		return month;
+	}
+
+	function isValidDay(day, month, year) {
+		var isValid = !(month > 12 ||
+							year < 1000 ||
+							day > new Date(year, month, 0).getDate());
+
+		return isValid;
+	}
 	
 	return DP;
 }());

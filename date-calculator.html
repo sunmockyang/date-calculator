@@ -9,6 +9,7 @@
 <style>
 	$$STYLES$$
 </style>
+<link rel="stylesheet" type="text/css" href="style.css">
 <div id="main-wrap" class="wrap">
 	<section>
 		<h1>Date Calculator</h1>
@@ -18,12 +19,12 @@
 			<label for="d1">
 				<h2>Start date</h2>
 			</label>
-			<input id="d1" type="text" tabindex="1" placeholder="E.g. 2015/12/30, January 12, 2015"/>
+			<input id="d1" type="text" tabindex="1" placeholder="E.g. 2015/12/30, January 12, 2015, Today"/>
 		</div>
 		<div class="input-wrap">
 			<label for="d2f">
 				<h2>End date or duration</h2>
-				<p>Calculate date, by adding or subtracting time. <a tabindex="0" href="#" onclick="mdl()">View examples</a></p>
+				<p>Calculate date, by adding or subtracting time. <a tabindex="0" href="#" id="mdlO">View examples</a></p>
 			</label>
 			<input id="d2" type="text" tabindex="2" placeholder="Eg: 2016/12/30, +100 days, -50 years"/>
 		</div>
@@ -31,16 +32,27 @@
 	<section>
 		<div class="result-header">
 			<h1 id="result1">Result</h1>
-			<p id="inputParsed"></p>
+			<p id="sub"></p>
 		</div>
+		<!-- <div class="result-formats hidden">
+			<h2>Other time formats</h2>
+			<ul id="otherResults" class="subdued">
+				<li>6 years + 1 day</li>
+				<li>72 months + 1 day</li>
+				<li>2191 days</li>
+				<li>52,584 hours</li>
+				<li>3,155,40 minutes</li>
+				<li>189,302,400 seconds</li>
+			</ul>
+		</div> -->
 	</section>
 	<section>
-<p>Made with Love by <a target="_blank" href="http://sunmock.com">Sunmock</a> and <a target="_blank" href="http://imrusty.com">Rusty.</a></p>
+<p>All 3kb Made with Love by <a target="_blank" href="http://sunmock.com">Sunny</a> and <a target="_blank" href="http://imrusty.com">Rusty.</a></p>
 </section>
 </div>
 <div class="mdl">
 	<div class="wrap">
-	<button class="close" onclick="mdl()">×</button>
+	<button class="close" id="mdlX">×</button>
 	<div class="content">
 		<div class="header">
 				<h1>Other Examples</h1>
@@ -49,11 +61,14 @@
 				<ul>
 					<li>+ 400 years</li>
 					<li>+ 6 months</li>
-					<li>- 5 weeks</li>
+					<li>5 days</li>
+					<li>- 5 weeks, 2 days</li>
 					<li>2015/12/30</li>
+					<li>12/30/2015</li>
 					<li>October 12, 1991</li>
-					<li>Sept 5, 2006</li>
+					<li>Sep. 5, 2006</li>
 					<li>Today</li>
+					<li>Tomorrow</li>
 				</ul>
 			</div>
 		</div>
@@ -63,3 +78,7 @@
 <script>
 	$$SCRIPT$$
 </script>
+<!-- <script type="text/javascript" src="js/DateUtils.js"></script>
+<script type="text/javascript" src="js/DateParser.js"></script>
+<script type="text/javascript" src="js/DateCalculator.js"></script>
+<script type="text/javascript" src="js/DocumentScript.js"></script> -->
