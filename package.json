@@ -1,13 +1,31 @@
 {
-  "name": "Date Calculator",
+  "name": "date-calculator",
   "version": "1.0.0",
-  "description": "A minimal date calculator",
+  "description": "A tiny date calculator app",
   "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunmockyang/date-calculator.git"
+  },
+  "keywords": [
+    "calculator",
+    "dates",
+    "date",
+    "month",
+    "year"
+  ],
+  "dependencies": {
+    "express": "^4.14.0",
+  },
   "author": "Sunmock Yang, Russell Baylis",
   "license": "MIT",
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "pug": "^2.0.0-beta6"
-  }
+  "bugs": {
+    "url": "https://github.com/sunmockyang/date-calculator/issues"
+  },
+  "homepage": "https://github.com/sunmockyang/date-calculator#readme"
 }
