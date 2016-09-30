@@ -14,6 +14,7 @@ body{
 	box-sizing: border-box;
 	overflow-x: hidden;
 	line-height: 1.5;
+  min-height: 100vh;
 }
 
 section{
@@ -45,9 +46,16 @@ h2{
 	font-size: 20px;
 }
 
-.input-wrap:nth-child(1),
-.result-header{
+.input-wrap:nth-child(1){
 	padding-bottom: 60px;
+}
+
+.hidden {
+  display: none;
+}
+
+.result-formats {
+  padding-top: 60px;
 }
 
 input{

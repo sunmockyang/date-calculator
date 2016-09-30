@@ -8,6 +8,8 @@ var app = (function(){
 	date2,
 	result,
 	resultElem,
+	otherSection,
+	otherList,
 	inputParsedElem;
 
 	function main(){
@@ -18,6 +20,8 @@ var app = (function(){
 		input2 = getElementById("d2");
 		inputParsedElem = getElementById("sub");
 		resultElem = getElementById("result1");
+		otherSection = getElementById("otherSection");
+		otherList = getElementById("otherList");
 
 		input1.addEventListener("keyup", onInput);
 		input2.addEventListener("keyup", onInput);
@@ -38,21 +42,20 @@ var app = (function(){
 		date2 = DP(inputText2);
 		result = DC(date1, date2);
 
-		resultElem.innerHTML = inputParsedElem.innerHTML = "";
+		resultElem.innerHTML = inputParsedElem.innerHTML = otherList.innerHTML = "";
+		otherSection.classList.add("hidden");
 		if (!result) {
 			resultElem.innerHTML = "Waiting for input...";
 			if (inputText1 !== "" || inputText2 !== "") {
-				inputParsedElem.innerHTML = formatDate(date1, inputText1) + " – " + formatDate(date2, inputText2);
+				var output1 = formatTime(date1, inputText1);
+				var output2 = formatTime(date2, inputText2)
+				inputParsedElem.innerHTML = output1 + ((output1) ? " – " : "") + output2;
 			}
 		}
 		else if (result instanceof Date) {
-			resultElem.innerHTML = formatDate(result);
+			resultElem.innerHTML = formatTime(result);
 
-			var sum = date2.reduce(function(a, b) {
-			    return a + b;
-			}, 0);
-
-			inputParsedElem.innerHTML = formatDate(date1) + ((sum > 0) ? " +" : " -") + formatUnit(date2);
+			inputParsedElem.innerHTML = formatTime(date1) + formatTime(date2);
 		}
 		else {
 			var timeBetweenString = appendUnitString("year", result[0], timeBetweenString);
@@ -61,6 +64,19 @@ var app = (function(){
 
 			resultElem.innerHTML = timeBetweenString + ((result[0] > 0 || result[1] > 0) ? (" (" + appendUnitString("day", result[3], "") + ")") : "");;
 			inputParsedElem.innerHTML = "Between " + formatDate(date1) + " – " + formatDate(date2);
+
+			createOtherOutput(appendList([getUnitString(result[0], "year"), getUnitString(result[1], "month"), getUnitString(result[2], "day")]));
+			createOtherOutput(appendList([getUnitString(result[0] * 12 + result[1], "month"), getUnitString(result[2], "day")]));
+			createOtherOutput(appendList([getUnitString(Math.floor(result[3] / 7), "week"), getUnitString(result[3] % 7, "day")]));
+			createOtherOutput(getUnitString(result[3], "day"));
+			createOtherOutput(getUnitString(result[3] * 12, "hour"));
+			createOtherOutput(getUnitString(result[3] * 720, "minute"));
+			createOtherOutput(getUnitString(result[3] * 720 * 60, "second"));
+			createOtherOutput(getUnitString(result[3] * 720 * 60 * 1000, "millisecond"));
+
+			if (otherList.innerHTML !== "") {
+				otherSection.classList.remove("hidden");
+			}
 		}
 	};
 
@@ -68,15 +84,26 @@ var app = (function(){
 		return (value > 0 || force) ? (((str === "") ? "" : " ") + value + " " + ((value !== 1) ? unit + "s" : unit)) : "";
 	};
 
+	function formatTime(value, originalText) {
+		if (value instanceof Array) {
+			return formatUnit(value);
+		}
+		else {
+			return formatDate(value, originalText);
+		}
+	}
+
 	function formatDate(date, originalText) {
 		return (date) ? MN[date.getMonth()] + " " + getOrdinal(date.getDate()) + ", " + date.getFullYear() : ((originalText === "") ? "No Date Entered" : "Invalid Date");
 	};
 
 	function formatUnit(interval) {
+		var sum = interval.reduce(function(a, b) {
+		    return a + b;
+		}, 0);
 		var abs = Math.abs.bind(Math);
-		var str = getUnitString(abs(interval[0]), Un[0]);
-		str += ((str != "") ? ", " : "") + getUnitString(abs(interval[1]), Un[1]);
-		str += (str.endsWith(", ") ? "" : ((str != "") ? ", " : "")) + getUnitString(abs(interval[2]), Un[2]);
+		var str = ((sum > 0) ? " +" : " -")
+		str += appendList([getUnitString(abs(interval[0]), Un[0]), getUnitString(abs(interval[1]), Un[1]), getUnitString(abs(interval[2]), Un[2])], true);
 		return str;
 	};
 
@@ -103,6 +130,17 @@ var app = (function(){
 		return str;
 	};
 
+	function appendList(list, force) {
+		if (list[0] != "" || force) {
+			var str = "";
+			list.some(function (element, i, arr) {
+				str += ((str != "" && element != "") ? ", " : "") + element;
+			});
+			return str;	
+		}
+		return "";
+	}
+
 	// http://stackoverflow.com/questions/12487422/take-a-value-1-31-and-convert-it-to-ordinal-date-w-javascript/12487454#12487454
 	function getOrdinal(n) {
 		if((parseFloat(n) == parseInt(n)) && !isNaN(n)){
@@ -112,6 +150,14 @@ var app = (function(){
 		}
 		return n;     
 	};
+
+	function createOtherOutput(str) {
+		if (str !== "") {
+			var li = document.createElement("li");
+			li.innerHTML = str;
+			otherList.appendChild(li);
+		}
+	}
 	
 	return main;
 }());

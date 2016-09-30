@@ -27,7 +27,7 @@ js_content = Uglifier.new.compile(js_content)
 
 # HTML
 html_content = File.read(html_path, :encoding => "UTF-8")
-# html_content = HtmlPress.press(html_content)
+html_content = HtmlPress.press(html_content)
 if html_content["$$STYLES$$"]
 	html_content["$$STYLES$$"] = css_content
 end

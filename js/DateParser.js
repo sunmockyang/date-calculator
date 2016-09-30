@@ -23,7 +23,7 @@ var DP = (function(){
 		else if (parseMonth(dateStringLower) !== null) {
 			date = parseText(dateStringLower);
 		}
-		else if (allNumbers && allNumbers.length <= 3){
+		else if (allNumbers && allNumbers.length >= 3){
 			date = parseMMDDYYYY(dateStringLower);
 		}
 		// else {
