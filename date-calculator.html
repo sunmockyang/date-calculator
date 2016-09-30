@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<title>Date Calculator</title>
+<meta charset=utf-8 />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Date calculator">
+<meta name="keywords" content="calculate, dates">
+<meta name="author" content="Russell Baylis, Sunmock Yang">
+<meta name="robots" content="index, follow">
+<style>
+	$$STYLES$$
+</style>
+<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+<div id="main-wrap" class="wrap">
+	<section>
+		<h1>Date Calculator</h1>
+	</section>
+	<section>
+		<div class="input-wrap">
+			<label for="d1">
+				<h2>Start date</h2>
+			</label>
+			<input id="d1" type="text" placeholder="E.g. Today, 2015/12/30, January 12, 2015"/>
+		</div>
+		<div class="input-wrap">
+			<label for="d2f">
+				<h2>End date or duration</h2>
+				<p>Calculate date, by adding or subtracting time. <a class="mdl-launch" href="#" id="mdlO">View examples</a></p>
+			</label>
+			<input id="d2" type="text" placeholder="Eg: 12/30/2016, +100 days, -50 years"/>
+		</div>
+	</section>
+	<section>
+		<div class="result-header">
+			<h1 id="result1">Result</h1>
+			<p id="sub"></p>
+		</div>
+		<div class="result-formats hidden" id="otherSection">
+			<h2>Other time formats</h2>
+			<ul id="otherList" class="subdued">
+			</ul>
+		</div>
+	</section>
+	<section>
+<p>Take a look at the source code on <a target="_blank" href="https://github.com/sunmockyang/date-calculator">GitHub.</a></p>
+<p>All 3.4KB Made with Love by <a target="_blank" href="http://sunmock.com">Sunny</a> and <a target="_blank" href="http://imrusty.com">Rusty.</a></p>
+</section>
+</div>
+<div class="mdl">
+	<button class="close" id="mdlX"">×</button>
+	<div class="wrap">
+	<div class="content">
+		<div class="header">
+				<h1>Other Examples</h1>
+			</div>
+			<div class="body">
+				<ul>
+					<li>+ 400 years</li>
+					<li>+ 6 months</li>
+					<li>5 days</li>
+					<li>- 5 weeks, 2 days</li>
+					<li>2015/12/30</li>
+					<li>12/30/2015</li>
+					<li>October 12, 1991</li>
+					<li>Sep. 5, 2006</li>
+					<li>Today</li>
+					<li>Tomorrow</li>
+				</ul>
+			</div>
+		</div>
+		<div class="bg"></div>
+	</div>
+</div>
+<script>
+	$$SCRIPT$$
+</script>
+<!-- <script type="text/javascript" src="js/DateUtils.js"></script>
+<script type="text/javascript" src="js/DateParser.js"></script>
+<script type="text/javascript" src="js/DateCalculator.js"></script>
+<script type="text/javascript" src="js/DocumentScript.js"></script> -->
