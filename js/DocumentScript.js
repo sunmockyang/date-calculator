@@ -26,6 +26,8 @@ var app = (function(){
 		input1.addEventListener("keyup", onInput);
 		input2.addEventListener("keyup", onInput);
 
+		input1.value = input2.value = "";
+
 		modalOn.onclick = modalOff.onclick = mdl;
 
 		modalOn.classList.remove("hidden");
