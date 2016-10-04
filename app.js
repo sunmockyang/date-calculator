@@ -2,21 +2,19 @@ var express = require('express');
 var compression = require('compression')
 var fs = require('fs');
 
+var port = process.env.PORT || 80;
 
 var projectRoot = "./";
 
 require(projectRoot + "js/DateCalculator.js");
 require(projectRoot + "js/DateParser.js");
 require(projectRoot + "js/DateUtils.js");
-
-var app = express();
-app.use(compression())
-
 var indexFile = projectRoot + "index.html"
 
-app.get('/', function(req, res){
-	// res.writeHead(200, {'Content-Type': 'text/html', 'Content-Encoding': 'gzip'});
+var app = express();
+app.use(compression());
 
+app.get('/', function(req, res){
 	var inputText1 = req.query.d1;
 	var inputText2 = req.query.d2;
 
@@ -78,16 +76,14 @@ app.get('/', function(req, res){
 			listText += createOtherOutput(appendList([getUnitString(result[0] * 12 + result[1], "month"), getUnitString(result[2], "day")]));
 			listText += createOtherOutput(appendList([getUnitString(Math.floor(result[3] / 7), "week"), getUnitString(result[3] % 7, "day")]));
 			listText += createOtherOutput(getUnitString(result[3], "day"));
-			listText += createOtherOutput(getUnitString(result[3] * 12, "hour"));
-			listText += createOtherOutput(getUnitString(result[3] * 720, "minute"));
-			listText += createOtherOutput(getUnitString(result[3] * 720 * 60, "second"));
-			listText += createOtherOutput(getUnitString(result[3] * 720 * 60 * 1000, "millisecond"));
+			listText += createOtherOutput(getUnitString(result[3] * 24, "hour"));
+			listText += createOtherOutput(getUnitString(result[3] * 1440, "minute"));
+			listText += createOtherOutput(getUnitString(result[3] * 86400, "second"));
+			listText += createOtherOutput(getUnitString(result[3] * 86400000, "millisecond"));
 
 			indexBody = injectValue(indexBody, "$$RESULTTIMEFORMATS$$", listText);
 		}
-		// zlib.gzip(indexBody, function (_, result) {
-		// 	res.send(result);
-		// });
+
 		res.send(indexBody);
 	});
 });
@@ -163,4 +159,4 @@ function createOtherOutput(str) {
 	return "";
 }
 
-app.listen(80);
+app.listen(port);
