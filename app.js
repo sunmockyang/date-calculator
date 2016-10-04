@@ -78,10 +78,10 @@ app.get('/', function(req, res){
 			listText += createOtherOutput(appendList([getUnitString(result[0] * 12 + result[1], "month"), getUnitString(result[2], "day")]));
 			listText += createOtherOutput(appendList([getUnitString(Math.floor(result[3] / 7), "week"), getUnitString(result[3] % 7, "day")]));
 			listText += createOtherOutput(getUnitString(result[3], "day"));
-			listText += createOtherOutput(getUnitString(result[3] * 12, "hour"));
-			listText += createOtherOutput(getUnitString(result[3] * 720, "minute"));
-			listText += createOtherOutput(getUnitString(result[3] * 720 * 60, "second"));
-			listText += createOtherOutput(getUnitString(result[3] * 720 * 60 * 1000, "millisecond"));
+			listText += createOtherOutput(getUnitString(result[3] * 24, "hour"));
+			listText += createOtherOutput(getUnitString(result[3] * 1440, "minute"));
+			listText += createOtherOutput(getUnitString(result[3] * 86400, "second"));
+			listText += createOtherOutput(getUnitString(result[3] * 86400000, "millisecond"));
 
 			indexBody = injectValue(indexBody, "$$RESULTTIMEFORMATS$$", listText);
 		}

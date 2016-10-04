@@ -62,21 +62,21 @@ var app = (function(){
 			inputParsedElem.innerHTML = formatTime(date1) + formatTime(date2);
 		}
 		else {
-			var timeBetweenString = appendUnitString("year", result[0], timeBetweenString);
-			timeBetweenString += appendUnitString("month", result[1], timeBetweenString);
-			timeBetweenString += appendUnitString("day", result[2], timeBetweenString, timeBetweenString === "");
+			var timeBetweenString = appendUnitString(Un[0], result[0], timeBetweenString);
+			timeBetweenString += appendUnitString(Un[1], result[1], timeBetweenString);
+			timeBetweenString += appendUnitString(Un[2], result[2], timeBetweenString, timeBetweenString === "");
 
-			resultElem.innerHTML = timeBetweenString + ((result[0] > 0 || result[1] > 0) ? (" (" + appendUnitString("day", result[3], "") + ")") : "");;
+			resultElem.innerHTML = timeBetweenString + ((result[0] > 0 || result[1] > 0) ? (" (" + appendUnitString(Un[2], result[3], "") + ")") : "");
 			inputParsedElem.innerHTML = "Between " + formatDate(date1) + " – " + formatDate(date2);
 
-			createOtherOutput(appendList([getUnitString(result[0], "year"), getUnitString(result[1], "month"), getUnitString(result[2], "day")]));
-			createOtherOutput(appendList([getUnitString(result[0] * 12 + result[1], "month"), getUnitString(result[2], "day")]));
-			createOtherOutput(appendList([getUnitString(Math.floor(result[3] / 7), "week"), getUnitString(result[3] % 7, "day")]));
-			createOtherOutput(getUnitString(result[3], "day"));
-			createOtherOutput(getUnitString(result[3] * 12, "hour"));
-			createOtherOutput(getUnitString(result[3] * 720, "minute"));
-			createOtherOutput(getUnitString(result[3] * 720 * 60, "second"));
-			createOtherOutput(getUnitString(result[3] * 720 * 60 * 1000, "millisecond"));
+			createOtherOutput(appendList([getUnitString(result[0], Un[0]), getUnitString(result[1], Un[1]), getUnitString(result[2], Un[2])]));
+			createOtherOutput(appendList([getUnitString(result[0] * 12 + result[1], Un[1]), getUnitString(result[2], Un[2])]));
+			createOtherOutput(appendList([getUnitString(Math.floor(result[3] / 7), "week"), getUnitString(result[3] % 7, Un[2])]));
+			createOtherOutput(getUnitString(result[3], Un[2]));
+			createOtherOutput(getUnitString(result[3] * 24, "hour"));
+			createOtherOutput(getUnitString(result[3] * 1440, "minute"));
+			createOtherOutput(getUnitString(result[3] * 86400, "second"));
+			createOtherOutput(getUnitString(result[3] * 86400000, "millisecond"));
 
 			if (otherList.innerHTML !== "") {
 				otherSection.classList.remove("hidden");
