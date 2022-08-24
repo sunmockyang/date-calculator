@@ -2,7 +2,7 @@
 
 A minuscule tool for doing date calculations with basic natural language support. First add in your starting date, and then either add or subtract time, or add a second date. We'll do the rest, and give you a range of useful time formats. Created for fun, modified for the [10k apart contest](https://a-k-apart.com).
 
-Check out the live demo [here](http://calculatedates.com)
+Check out the live demo [here](https://calculatedates.rustle.ca/)
 
 __The page currently sits at 3.7KB after minification + gzipping__
 
